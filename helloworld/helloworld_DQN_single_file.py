@@ -351,7 +351,8 @@ def get_rewards_and_steps(env, actor, if_render: bool = False) -> (float, int): 
 
 def train_dqn_for_cartpole():
     env_args = {
-        'env_name': 'CartPole-v0',  # A pole is attached by an un-actuated joint to a cart.
+        # 'env_name': 'CartPole-v0',  # A pole is attached by an un-actuated joint to a cart.
+        'env_name': 'CartPole-v1',
         'state_dim': 4,  # (CartPosition, CartVelocity, PoleAngle, PoleAngleVelocity)
         'action_dim': 2,  # (Push cart to the left, Push cart to the right)
         'if_discrete': True,  # discrete action space

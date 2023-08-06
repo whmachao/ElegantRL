@@ -1,8 +1,8 @@
 import gym
 import torch
 
-from env import PendulumEnv
-from agent import *
+from helloworld.env import PendulumEnv
+from helloworld.agent import *
 
 
 def check_agent_base(state_dim=4, action_dim=2, batch_size=3, net_dims=(64, 32), gpu_id=0):
@@ -29,14 +29,14 @@ def check_agent_base(state_dim=4, action_dim=2, batch_size=3, net_dims=(64, 32),
 
 
 def check_agent_dqn(batch_size=3, horizon_len=16, net_dims=(64, 32), gpu_id=0):
-    from config import build_env
+    from helloworld.config import build_env
     env_args = {'env_name': 'CartPole-v1', 'state_dim': 4, 'action_dim': 2, 'if_discrete': True}
     env = build_env(env_class=gym.make, env_args=env_args)
     state_dim = env_args['state_dim']
     action_dim = env_args['action_dim']
 
     '''init agent'''
-    from agent import ReplayBuffer
+    from helloworld.agent import ReplayBuffer
     buffer = ReplayBuffer(gpu_id=gpu_id, max_size=int(1e4), state_dim=state_dim, action_dim=1, )
     args = Config()
     args.batch_size = batch_size
@@ -84,14 +84,14 @@ def check_agent_dqn(batch_size=3, horizon_len=16, net_dims=(64, 32), gpu_id=0):
 
 
 def check_agent_ddpg(batch_size=3, horizon_len=16, net_dims=(64, 32), gpu_id=0):
-    from config import build_env
+    from helloworld.config import build_env
     env_args = {'env_name': 'Pendulum', 'state_dim': 3, 'action_dim': 1, 'if_discrete': False}
     env = build_env(env_class=PendulumEnv, env_args=env_args)
     state_dim = env_args['state_dim']
     action_dim = env_args['action_dim']
 
     '''init agent'''
-    from agent import ReplayBuffer
+    from helloworld.agent import ReplayBuffer
     buffer = ReplayBuffer(gpu_id=gpu_id, max_size=int(1e4), state_dim=state_dim, action_dim=action_dim, )
     args = Config()
     args.batch_size = batch_size
@@ -137,7 +137,7 @@ def check_agent_ddpg(batch_size=3, horizon_len=16, net_dims=(64, 32), gpu_id=0):
 
 
 def check_agent_ppo(batch_size=3, horizon_len=16, net_dims=(64, 32), gpu_id=0):
-    from config import build_env
+    from helloworld.config import build_env
     env_args = {'env_name': 'Pendulum', 'state_dim': 3, 'action_dim': 1, 'if_discrete': False}
     env = build_env(env_class=PendulumEnv, env_args=env_args)
     state_dim = env_args['state_dim']
